@@ -1,4 +1,4 @@
-Library.module("Entities", function (Entities, ContactManager, Backbone, Marionette, $, _) {
+app.module("Entities", function (Entities, app, Backbone, Marionette, $, _) {
 
     Entities.User = Backbone.Model.extend({
         defaults: {
@@ -22,7 +22,7 @@ Library.module("Entities", function (Entities, ContactManager, Backbone, Marione
         }
     }
 
-    Library.reqres.setHandler("users:entities", function () {
+    app.reqres.setHandler("users:entities", function () {
         return API.getUserEntities();
     });
 });

@@ -1,42 +1,51 @@
-Library.module("UsersApp.List", function (List, ContactManager, Backbone, Marionette, $, _) {
+app.module("UsersApp", function (UsersApp, app, Backbone, Marionette, $, _) {
 
-    List.User = Marionette.ItemView.extend({
+    UsersApp.User = Marionette.ItemView.extend({
         tagName: 'tr',
         template: '#user-tr',
 
         ui: {
-            show: '.btn-success',
-            edit: '.btn-warning',
-            give: '.btn-default',
-            delete: '.btn-danger'
+            show: '.js-show',
+            edit: '.js-edit',
+            give: '.js-give',
+            delete: '.js-delete'
         },
 
         events: {
-            'click @ui.js-show': 'showClicked',
-            'click @ui.js-edit': 'editClicked',
-            'click @ui.js-give': 'giveClicked',
-            'click @ui.js-delete': 'deleteClicked'
+            'click @ui.show': 'showClicked',
+            'click @ui.edit': 'editClicked',
+            'click @ui.give': 'giveClicked',
+            'click @ui.delete': "deleteClicked"
         },
 
-        showClicked: function () {
-
+        showClicked: function (e) {
+            app.UsersApp.Controller.showUser(this.model);
         },
-        editClicked: function () {
-
-        },
-        giveClicked: function () {
-
-        },
-        deleteClicked: function () {
+        editClicked: function (e) {
             
+        },
+        giveClicked: function (e) {
+
+        },
+        deleteClicked: function (e) {
+            this.model.destroy();
+        },
+
+        remove: function () {
+            this.$el.fadeOut();
         }
+
     });
 
-    List.Users = Marionette.CompositeView.extend({
+    UsersApp.ShowUser = Marionette.ItemView.extend({
+        template: '#user-view'
+    });
+
+    UsersApp.Users = Marionette.CompositeView.extend({
         tagName: "table",
         className: "table table-striped table-hover table-bordered",
         template: "#table-template",
-        childView: List.User,
+        childView: UsersApp.User,
         itemViewContainer: "tbody"
     });
 
