@@ -53,8 +53,7 @@ app.module("UsersApp", function (UsersApp, app, Backbone, Marionette, $, _) {
                 else {
                     var fetchingBook = app.request('books:entity', book_id);
                     $.when(fetchingBook).done(function (book) {
-                        book.set({user_id: user_id});
-                        book.save().then(function () {
+                        book.save({user_id: user_id}, {validate: false}).then(function () {
                             app.trigger('show:user', user_id);
                         })
                     });

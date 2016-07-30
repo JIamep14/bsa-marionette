@@ -143,7 +143,6 @@ app.module("BooksApp", function (BooksApp, app, Backbone, Marionette, $, _) {
                 var genre = this.ui.form.find("input[name='genre']").val();
                 var year = this.ui.form.find("input[name='year']").val();
                 book.unset('id');
-                debugger;
                 if (book.save({
                         title: title,
                         author: author,
@@ -153,7 +152,7 @@ app.module("BooksApp", function (BooksApp, app, Backbone, Marionette, $, _) {
                         success: function (model, response, options) {
                             self.ui.messages.addClass('alert alert-dismissible alert-success');
                             self.ui.messages.append('Success');
-                            app.trigger('show:book', self.model.get('id'));
+                            app.trigger('show:book', model.get('id'));
                         },
                         error: function () {
                             self.ui.messages.addClass('alert alert-dismissible alert-warning');
